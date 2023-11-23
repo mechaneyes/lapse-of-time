@@ -66,7 +66,6 @@ while True:
     # Update the solar events for the next day around midnight each night
     # 
     if (datetime.time(0, 0) <= now_object <= datetime.time(0, 15)):
-    # if (datetime.time(13, 40) <= now_object <= datetime.time(13, 50)):
 
         s = sun(city.observer, date=datetime.date.today(), tzinfo=city.timezone)
         dawn = s['dawn']
