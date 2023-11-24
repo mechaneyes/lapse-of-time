@@ -1,4 +1,4 @@
-# BK TimeLapsing
+# FortGreene TimeLapsing
 
 ### Time passing through my studio window in Brooklyn
 
@@ -28,7 +28,7 @@ So obviously there are things I'm going to need to experiment with once I start 
 
 ## Images
 
-Images courtesy of Midjourney
+Images created via Midjourney
 
 ### Prompt:
 
