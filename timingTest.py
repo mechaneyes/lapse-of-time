@@ -6,8 +6,8 @@ import time
 import datetime
 
 
-def get_solar_events(city):
-    s = sun(city.observer, date=datetime.date.today(), tzinfo=city.timezone)
+def get_solar_events(city, date):
+    s = sun(city.observer, date=date, tzinfo=city.timezone)
     dawn = s['dawn']
     sunrise = s['sunrise']
     noon = s['noon']
@@ -45,10 +45,10 @@ east_tz = timezone('US/Eastern')
 west_tz = timezone('US/Pacific')
 nyc = LocationInfo("New York", "USA", "US/Eastern", 40.730610, -73.935242)
 
+
 now = datetime.datetime.now(east_tz)
 
-
-dawn, sunrise, noon, sunset, dusk, start_time, end_time = get_solar_events(nyc)
+dawn, sunrise, noon, sunset, dusk, start_time, end_time = get_solar_events(nyc, now.date())
 write_solar_events_to_file(f"\n🟢 Starting: {now}\n\n", dawn, sunrise, noon, sunset, dusk, start_time, end_time)
 
 
@@ -57,7 +57,7 @@ write_solar_events_to_file(f"\n🟢 Starting: {now}\n\n", dawn, sunrise, noon, s
 while True:
 
     now = datetime.datetime.now(east_tz)
-    now_object = datetime.datetime.now(east_tz).time()
+    time_now = datetime.datetime.now(east_tz).time()
     timestamp = now.strftime("%Y%m%d_%H%M%S")
 
     if (start_time <= now <= end_time):
@@ -72,9 +72,9 @@ while True:
 
     # Update the solar events for the next day around midnight each night
     # 
-    if (datetime.time(0, 0) <= now_object <= datetime.time(0, 6)):
+    if (datetime.time(1, 0) <= time_now <= datetime.time(1, 6)):
 
-        dawn, sunrise, noon, sunset, dusk, start_time, end_time = get_solar_events(nyc)
+        dawn, sunrise, noon, sunset, dusk, start_time, end_time = get_solar_events(nyc, now.date())
         write_solar_events_to_file(f"\n🟣 Updating Solar Events for the Day\n🟢 Starting: {now}\n\n", dawn, sunrise, noon, sunset, dusk, start_time, end_time)
 
 
