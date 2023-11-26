@@ -5,7 +5,8 @@ from datetime import timedelta
 import time
 import datetime
 
-
+# get solar events for the day
+# 
 def get_solar_events(city, date):
     s = sun(city.observer, date=date, tzinfo=city.timezone)
     dawn = s['dawn']
@@ -18,6 +19,8 @@ def get_solar_events(city, date):
 
     return dawn, sunrise, noon, sunset, dusk, start_time, end_time
 
+# print solar events to console
+# 
 def print_solar_events(dawn, sunrise, noon, sunset, dusk, start_time, end_time):
     print((
         f'Dawn:    {dawn}\n'
@@ -29,6 +32,8 @@ def print_solar_events(dawn, sunrise, noon, sunset, dusk, start_time, end_time):
         f'End:     {end_time}\n'
     ))
 
+# log solar events to file
+# 
 def write_solar_events_to_file(message, dawn, sunrise, noon, sunset, dusk, start_time, end_time):
     with open('timeLapseLog.txt', 'a') as file:
         file.write(message)
@@ -39,6 +44,13 @@ def write_solar_events_to_file(message, dawn, sunrise, noon, sunset, dusk, start
         file.write(f'☉ Dusk:    {dusk}\n\n')
         file.write(f'  Start:   {start_time}\n')
         file.write(f'  End:     {end_time}\n\n')
+
+# log current time passing appropriate message
+# 
+def write_time_to_file(message):
+    with open('timeLapseLog.txt', 'a') as file:
+        file.write(message)
+
 
 
 east_tz = timezone('US/Eastern')
@@ -61,12 +73,10 @@ while True:
     timestamp = now.strftime("%Y%m%d_%H%M%S")
 
     if (start_time <= now <= end_time):
-        with open('timelapseLog.txt', 'a') as f:
-            f.write(f"🌝 {timestamp}\n")
+        write_time_to_file(f"🌝 {timestamp}\n")
 
     else:
-        with open('timelapseLog.txt', 'a') as f:
-            f.write(f"🌚 {timestamp}\n")
+        write_time_to_file(f"🌚 {timestamp}\n")
     
 
 
