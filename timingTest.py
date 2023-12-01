@@ -42,8 +42,8 @@ def write_solar_events_to_file(message, dawn, sunrise, noon, sunset, dusk, start
         file.write(f'☉ Noon:    {noon}\n')
         file.write(f'☉ Sunset:  {sunset}\n')
         file.write(f'☉ Dusk:    {dusk}\n\n')
-        file.write(f'  Start:   {start_time}\n')
-        file.write(f'  End:     {end_time}\n\n')
+        file.write(f'☉ Start:   {start_time}\n')
+        file.write(f'☉ End:     {end_time}\n\n')
 
 # log current time passing appropriate message
 # 
